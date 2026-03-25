@@ -1,0 +1,6 @@
+- Configura o ambiente de desenvolvimento, conforme as funcionalidades e características do aplicativo computacional para web.
+- Desenvolve softwares de acordo com as melhores práticas da linguagem de programação selecionada.
+- Elabora e testa código conforme as funcionalidades e características do aplicativo computacional para web.
+- Realiza a depuração e compilação do código desenvolvido, de acordo com orientações técnicas da IDE utilizada.
+- Utiliza comandos de integração dos objetos de bancos de dados com o código construído para web, de acordo com premissas do sistema operacional (servidor) de rede.
+- Elabora o manual do projeto de software desenvolvido, conforme orientação técnica.
