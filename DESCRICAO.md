@@ -1,0 +1,5 @@
+- Planeja o desenvolvimento de software, de acordo com as características do projeto e as regras de negócio.
+- Desenvolve algoritmo, de acordo com as melhores práticas de programação.
+- Desenvolve algoritmos computacionais, de acordo com as premissas da linguagem selecionada.
+- Testa algoritmos computacionais, de acordo com as orientações técnicas da linguagem selecionada.
+- Valida a estrutura de dados, conforme os resultados dos testes dos algoritmos.
