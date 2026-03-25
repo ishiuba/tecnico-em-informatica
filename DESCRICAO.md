@@ -1,0 +1,5 @@
+- Constrói diagramas de dados aferindo a modelagem e estrutura do banco de dados, de acordo com as especificações técnicas.
+- Realiza a instalação e configuração de sistema gerenciador de banco de dados (SGBD), de acordo com especificações técnicas.
+- Elabora scripts SQL de construção, inserção e manipulação dos dados, conforme especificação técnica da linguagem SQL.
+- Realiza importação e exportação de dados, conforme regras do sistema gerenciador de banco de dados (SGBD).
+- Planeja rotinas de backup e restore da base de dados, conforme especificações técnicas do sistema gerenciador de banco de dados (SGBD).
