@@ -1,0 +1,6 @@
+- Elabora plano de trabalho de instalação e configuração do equipamento de gerenciamento da rede local (servidor), conforme as necessidades do cliente e de acordo com as recomendações de fabricantes.
+- Instala equipamento de gerenciamento da rede local (servidor), de acordo com as normas e os procedimentos técnicos.
+- Instala sistema operacional de rede local (servidor), de acordo com as normas e os procedimentos técnicos.
+- Configura os serviços de gerenciamento da rede local (servidor), de acordo com o planejamento e as recomendações de fabricantes.
+- Realiza o monitoramento de redes com software de segurança e gera relatórios de atividades na rede, conforme recomendações técnicas.
+- Configura máquinas virtuais por meio de ferramentas de virtualização, de acordo com as normas e os procedimentos técnicos.
