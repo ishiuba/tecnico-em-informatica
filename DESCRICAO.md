@@ -1,0 +1,4 @@
+- Realiza diagnóstico de funcionalidade da rede local, conforme recomendações técnicas de software de monitoramento.
+- Substitui os componentes de rede local, conforme o diagnóstico realizado e as recomendações técnicas dos fabricantes.
+- Repara cabeamento de redes locais, conforme as recomendações técnicas dos fabricantes.
+- Testa e realiza correções na rede local de computadores para assegurar seu funcionamento.
