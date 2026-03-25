@@ -1,0 +1,7 @@
+- Organiza os recursos de hardware conforme as necessidades da demanda e o ambiente de trabalho.
+- Realiza a preparação física dos computadores e seus periféricos para a instalação dos sistemas operacionais e dos aplicativos, conforme as recomendações dos fabricantes.
+- Verifica a compatibilidade das especificações técnicas do computador, de acordo com os requisitos do sistema operacional e dos aplicativos a serem instalados.
+- Instala, atualiza e configura sistemas operacionais, conforme legislação vigente de proteção à propriedade intelectual de programa de computador e especificações técnicas do hardware.
+- Instala, atualiza e configura aplicativos de segurança, conforme as recomendações do fabricante.
+- Instala e atualiza BIOS, firmware e drivers dos computadores e periféricos, conforme as recomendações do fabricante.
+- Configura e testa adaptadores de rede, redes Small Office Home Office (Soho), dispositivos móveis, periféricos e a conectividade da rede, conforme as especificações técnicas.
