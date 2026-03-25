@@ -1,0 +1,5 @@
+- Desenvolve wireframe e mapa do site de acordo com os princípios de arquitetura da informação.
+- Utiliza os principais formatos, resoluções e modos de cor, conforme os critérios de publicação de imagens na web.
+- Realiza as operações de ajuste, recorte e retoque em imagens digitais, de acordo com os requisitos de acessibilidade e usabilidade dos sites web.
+- Realiza otimização dos sites web, conforme os requisitos de exportação de imagens.
+- Desenvolve layout de sites, de acordo com os padrões de arquivos para internet e os requisitos de acessibilidade e usabilidade dos sites web.
