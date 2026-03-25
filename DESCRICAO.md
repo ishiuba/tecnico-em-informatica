@@ -1,0 +1,3 @@
+- Cumpre as atividades previstas no plano de ação, conforme desafio identificado no tema gerador.
+- Apresenta resultados ou soluções, de acordo com as problemáticas do tema gerador e objetivos do Projeto Integrador.
+- Mobiliza as marcas formativas na proposição de estratégias e soluções de acordo com o contexto e os desafios apresentados.
