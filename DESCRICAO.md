@@ -1,0 +1,7 @@
+- Planeja e organiza a utilização dos recursos, conforme as necessidades da demanda do cliente e o ambiente de trabalho.
+- Realiza as etapas do processo de segurança e restauração (backup e restore) dos dados do computador, conforme normas, procedimentos técnicos e legislação vigente.
+- Verifica o funcionamento do hardware, utilizando ferramentas e técnicas para diagnóstico de falhas, de acordo com as recomendações das normas técnicas dos fabricantes.
+- Verifica o funcionamento do software, utilizando técnicas para diagnóstico, de acordo com as recomendações dos fabricantes.
+- Verifica e corrige problemas físicos, lógicos e de conectividade, de acordo com as recomendações dos fabricantes.
+- Instala os pacotes de atualização do sistema operacional, de acordo com as recomendações técnicas.
+- Testa o funcionamento do computador, dos periféricos e a conectividade da rede por meio de instrumentos e softwares específicos, conforme as recomendações técnicas de cada fabricante.
