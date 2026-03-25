@@ -1,0 +1,7 @@
+- Descreve as funcionalidades e aplicações da arquitetura de computadores, de acordo com as orientações técnicas do fabricante.
+- Utiliza medidas de prevenção contra descargas eletrostáticas, de acordo com as orientações do fabricante.
+- Testa componentes de computadores e periféricos, de acordo com as recomendações técnicas.
+- Configura os componentes do computador conforme recomendações técnicas.
+- Monta computadores conforme as recomendações e os procedimentos técnicos de fabricantes.
+- Configura os parâmetros de inicialização da máquina conforme recomendações técnicas.
+- Realiza inspeção final do equipamento conforme recomendações técnicas.
