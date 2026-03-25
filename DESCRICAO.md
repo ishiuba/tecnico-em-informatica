@@ -1,0 +1,6 @@
+- Planeja redes locais conforme as condições do ambiente.
+- Interpreta requisitos preestabelecidos, de acordo com projetos de rede.
+- Instala fisicamente redes locais, de acordo com as normas e os padrões dos fabricantes.
+- Configura equipamentos de redes locais de computadores e a segurança, de acordo com projeto ou documentação predefinida.
+- Testa e realiza correções no funcionamento dos equipamentos de redes locais, utilizando ferramentas de diagnóstico de redes específicas, conforme recomendação técnica.
+- Instala e configura as ferramentas de monitoramento de redes, conforme as especificações dos fabricantes.
