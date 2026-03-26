@@ -6,7 +6,8 @@
 #### Socket: encaixe do processador na placa mãe. Encaixe do cooler na placa mãe. Então o socket deve ser igual na placa mãe, no processador e no cooler.
 
 ### Exemplos de Socket:
-- Intel 14th e 15th geração(??): LGA1700 --> O que muda são os chipsets. Para usar 14th e 15th faz-se necessário placa mãe com chipsets da serie 600 e 700. Veja o link anexo ao material.
+- Intel Core Ultra (15th geração): LGA1851
+- Intel 14th: LGA1700 --> O que muda são os chipsets. Para usar 14th e 15th faz-se necessário placa mãe com chipsets da serie 600 e 700. Veja o link anexo ao material.
 - Intel 12th e 13th geração: LGA1700
 - Intel 10th e 11th geração: LGA1200
 - Intel 6th até 9th geração: LGA1151 --> O que muda é que na 6th e 7th geração usam chipsets da série 100 e 200. Para a 8th e 9th geração, usam chipsets da série 300.
