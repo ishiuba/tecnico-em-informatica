@@ -26,3 +26,6 @@ Dica: veja que placa mãe com 4 slots DIMM geralmente tem 2 cores nos slots, jus
 [TUDO QUE VOCÊ DEVE SABER SOBRE MEMÓRIA RAM - MW Informática](https://www.youtube.com/watch?v=tOjtfpMmuFs&authuser=0)
 
 [QUAD CHANNEL DE MEMÓRIA RAM MUDA MUITO DO SIMPLES DUAL CHANNEL? - MW Informática](https://www.youtube.com/watch?v=wYDgC5nmKjk&authuser=0)
+
+### OBS 
+Memórias RAM com a tecnologia XMP **podem durar** menos que uma memória com o chip SDP padrão pois elas operam acima do recomendado. Geralmente não é perceptível para o **consumidor final**, porém em certas condições faz diferença.
