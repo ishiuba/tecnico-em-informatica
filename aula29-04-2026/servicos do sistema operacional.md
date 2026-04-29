@@ -1,6 +1,6 @@
-Você deve ter permissão de Administrador para visualizar e gerenciar os serviços do Windows. 
+## Você deve ter permissão de Administrador para visualizar e gerenciar os serviços do Windows. 
 
-No Windows, onde você pode gerenciar os serviços?
+#### No Windows, onde você pode gerenciar os serviços?
 Nas configurações, procure por "Serviços"
 Abra a janela "Executar" (🪟+R ), digite services.msc e Enter/OK ou
 Abra a janela "Executar" (🪟+R ) e digite msconfig, Enter/OK e clique na guia "Serviços"
