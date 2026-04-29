@@ -1,2 +1,0 @@
-Processadores Intel com a letra F no final não tem placa de vídeo onboard.
-Processadores AMD até a 5th geração (linha 5000) com a letra G no final tem placa de vídeo onboard. Já a 7th geração (linha 7000) a nomenclatura mudou, veja o link do site do fabricante abaixo.
