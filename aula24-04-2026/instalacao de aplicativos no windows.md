@@ -1,0 +1,8 @@
+### Existem algumas maneiras de instalar aplicativos no Windows:
+1. Use um navegador para entrar no site do fabricante do App e fazer download do programa de instalação;
+2. Microsoft Store
+3. Gerenciador de Pacotes: Winget (Microsoft) e Chocolatey
+
+#### Pontos de observação ao instalar Apps:
+- Algumas instalações s/ podem ser realizadas por um usuário administrador
+- Alguns programas permitem que a instalação aconteça apenas para aquele usuário (ou todos)
