@@ -8,15 +8,15 @@
 
 ##### Os sistemas de arquivo mais utilizados são:
 
-\- NTFS: utilizado pela Microsoft no Windows
+- NTFS: utilizado pela Microsoft no Windows
 
-\- exFAT: utilizado para pendrive, HD/SSD externo, cartões de memoria
+- exFAT: utilizado para pendrive, HD/SSD externo, cartões de memoria
 
-\- EXT4: utilizado em sistemas Linux (não obrigatório, mas comum)
+- EXT4: utilizado em sistemas Linux (não obrigatório, mas comum)
 
-\- APFS: utilizado em sistemas da Apple
+- APFS: utilizado em sistemas da Apple
 
-\- FAT32: utilizado em sistemas legados
+- FAT32: utilizado em sistemas legados
 
 
 
