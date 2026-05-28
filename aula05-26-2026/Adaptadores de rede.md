@@ -17,11 +17,11 @@ O endereço IP não só identifica o dispositivo, mas também identifica a rede 
 
 E quem faz isso é a Máscara de Sub-rede. Os formatos mais comuns são:
 
-255.0.0.0
+``255.0.0.0``
 
-255.255.0.0
+``255.255.0.0``
 
-255.255.255.0
+``255.255.255.0``
 
 Onde a parte que tem "255" identifica a rede
 
@@ -50,11 +50,8 @@ Estes tipos de endereços não se misturam: IPs públicos não existem em redes 
 
 Para visualizar as configurações de IP no Windows, abra o CMD e digite:
 
-ipconfig    (ver configurações resumidas de IP de todos os adaptadores de rede)
-
-ipconfig /all (ver todas as configurações de IP de todos os adaptadores de rede)
-
-ping <endereço> (testa a conectividade de rede com o <endereço>, que pode ser um IP, um domínio ou o nome de um host)
-
-hostname (mostra o nome do computador na rede local)
+- *ipconfig*    (ver configurações resumidas de IP de todos os adaptadores de rede)
+- *ipconfig /all* (ver todas as configurações de IP de todos os adaptadores de rede)
+- *ping <endereço>* (testa a conectividade de rede com o <endereço>, que pode ser um IP, um domínio ou o nome de um host)
+- *hostname* (mostra o nome do computador na rede local)
 
