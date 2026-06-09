@@ -1,0 +1,22 @@
+RAID é uma sigla em inglês para Redundant Array of Inexpensive Disks ou algo como Matriz Redundante de Discos Independentes.
+
+Para um RAID ser criado, é necessário um controlador RAID. O controlador pode ser simulado por software e utilizar os recursos do computador (processador e RAM) ou pode ter um hardware dedicado para controlar o acesso aos discos, o que é mais comum.
+
+Quando um RAID é criado, o controlador RAID usa um arranjo de vários discos e o SO entende como apenas um disco. O sistema operacional não sabe que existe essa abstração e todo controle de gravação, leitura, divisão, espelhamento ou cálculo de paridade é realizado pelo controlador RAID.
+
+Tipos de arranjos RAID:
+RAID 0: divide os dados entre os discos. Mínimo de 2 discos.
+RAID 1: espelha os dados nos discos. Mínimo de 2 discos.
+RAID 5: divide os dados e a paridade das informações nos discos. Mínimo de 3 discos.
+RAID 6: divide os dados e dupla paridade das informações nos discos. Mínimo de 4 discos.
+RAID 10: divide e espelha os dados nos discos. Mínimo de 4 discos.
+
+Vamos descobrir mais sobre os tipos de RAID com os materiais disponíveis.
+
+https://www.youtube.com/watch?v=8V5FoTQpjIE&authuser=0
+
+https://www.controle.net/faq/qual-o-melhor-raid-a-ser-usado?authuser=0
+
+https://www.controle.net/novo/assets/materiais/ebook/ebook-raid-guia-simplificado-sobre-arranjos-de-disco.pdf?authuser=0
+
+https://docs.google.com/spreadsheets/d/1S4-J6mmpbbW9tQTICaF9LtLc4s1sKnV3TqPJfENh204/edit?usp=classroom_web&authuser=0
