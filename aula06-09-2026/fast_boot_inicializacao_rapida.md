@@ -1,6 +1,6 @@
-Este material e dividido em duas partes:
-1) Diferenças entre fast boot (firmware) e inicialização rápida do Windows;
-2) Sobre a inicialização rápida do Windows; 
+### Este material e dividido em duas partes:
+1. Diferenças entre fast boot (firmware) e inicialização rápida do Windows;
+2. Sobre a inicialização rápida do Windows; 
 
 1 - Diferenças entre fast boot (firmware) e inicialização rápida do Windows
 Vamos comparar dois recursos que, apesar de terem nomes parecidos, atuam em momentos diferentes do processo de inicialização do computador:
@@ -49,6 +49,6 @@ Fonte: Copilot
 
 Já aconteceu com você de pedir para o computador desligar e ele reinicia? A causa e possível solução estão no material anexo oficial da Microsoft. Boa leitura!
 
-https://drive.google.com/file/d/1Kp_ssbfkTUszUEjl8vvbntrw0jX3O_Jd/view?usp=classroom_web&authuser=0
+[Fast boot vs inicialização rapida](https://drive.google.com/file/d/1Kp_ssbfkTUszUEjl8vvbntrw0jX3O_Jd/view?usp=classroom_web&authuser=0)
 
-https://learn.microsoft.com/pt-br/troubleshoot/windows-client/setup-upgrade-and-drivers/fast-startup-causes-system-hibernation-shutdown-fail?authuser=0
+[A inicialização rápida faz com que a hibernação ou o desligamento falhe no Windows 10 ou Windows 8.1](https://learn.microsoft.com/pt-br/troubleshoot/windows-client/setup-upgrade-and-drivers/fast-startup-causes-system-hibernation-shutdown-fail?authuser=0)
