@@ -46,7 +46,7 @@ Acelerator (3 vagas TI + Envio de currículo): [Ver Vagas](https://acelerator.co
 
 Cooper Card (1 vaga TI): [Ver Vagas](https://vagascoopercard.rhgestor.com.br/)
 
-Buysoft (3 vagas): [Ver Vagas](https://vagascoopercard.rhgestor.com.br/)
+Buysoft (3 vagas): [Ver Vagas](https://buysoft.com.br/work-with-us)
 
 DB1 Group (2 vagas TI): [Ver Vagas](https://db1.inhire.app/vagas?utm_source=site&utm_medium=link_footer&utm_campaign=db1group)
 
