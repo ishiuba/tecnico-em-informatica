@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: Instalação do Linux Mint no VirtualBox</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .step-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .step-card:hover {
+            transform: translateY(-2px);
+        }
+        /* Barra de rolagem personalizada para a barra lateral */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(16, 185, 129, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-emerald-500 text-slate-950 p-2 rounded-lg font-bold text-sm tracking-wider">
+                    VM
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg text-slate-100">Guia de Virtualização</h1>
+                    <p class="text-xs text-emerald-400">Linux Mint MATE no VirtualBox</p>
+                </div>
+            </div>
+            <div class="text-xs text-slate-400 bg-slate-800/80 px-3 py-1.5 rounded-full border border-slate-700/50">
+                Progresso: <span id="progress-text" class="text-emerald-400 font-semibold">1 de 27</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barra de Progresso Global -->
+    <div class="w-full bg-slate-800 h-1.5 sticky top-16 z-50">
+        <div id="progress-bar" class="bg-emerald-500 h-1.5 w-[3.7%] transition-all duration-500"></div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-8 md:py-12 flex flex-col lg:flex-row gap-8">
+        
+        <!-- Navegação Lateral (Desktop) -->
+        <aside class="w-full lg:w-80 shrink-0 space-y-2 hidden lg:block">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 px-3 mb-4">Etapas do Processo</h3>
+            <nav class="space-y-1 max-h-[calc(100vh-15rem)] overflow-y-auto pr-2 custom-scrollbar">
+                <button onclick="goToStep(1)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" id="side-btn-1">
+                    <span class="w-6 h-6 rounded-md bg-emerald-500 text-slate-950 flex items-center justify-center font-bold text-xs shrink-0">1</span>
+                    <span>Criar Nova Máquina</span>
+                </button>
+                <button onclick="goToStep(2)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-2">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">2</span>
+                    <span>Localizar ISO</span>
+                </button>
+                <button onclick="goToStep(3)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-3">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">3</span>
+                    <span>Selecionar o Arquivo</span>
+                </button>
+                <button onclick="goToStep(4)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-4">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">4</span>
+                    <span>Confirmar Configurações</span>
+                </button>
+                <button onclick="goToStep(5)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-5">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">5</span>
+                    <span>Hardware Virtual</span>
+                </button>
+                <button onclick="goToStep(6)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-6">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">6</span>
+                    <span>Disco Rígido</span>
+                </button>
+                <button onclick="goToStep(7)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-7">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">7</span>
+                    <span>Iniciar a Máquina Virtual</span>
+                </button>
+                <button onclick="goToStep(8)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-8">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">8</span>
+                    <span>Iniciar o Sistema (GRUB)</span>
+                </button>
+                <button onclick="goToStep(9)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-9">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">9</span>
+                    <span>Iniciar Instalação</span>
+                </button>
+                <button onclick="goToStep(10)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-10">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">10</span>
+                    <span>Escolher Idioma</span>
+                </button>
+                <button onclick="goToStep(11)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-11">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">11</span>
+                    <span>Português do Brasil</span>
+                </button>
+                <button onclick="goToStep(12)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-12">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">12</span>
+                    <span>Teclado</span>
+                </button>
+                <button onclick="goToStep(13)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-13">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">13</span>
+                    <span>Codecs Multimídia</span>
+                </button>
+                <button onclick="goToStep(14)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-14">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">14</span>
+                    <span>Tipo de Instalação</span>
+                </button>
+                <button onclick="goToStep(15)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-15">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">15</span>
+                    <span>Fuso Horário</span>
+                </button>
+                <button onclick="goToStep(16)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-16">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">16</span>
+                    <span>Dados do Utilizador</span>
+                </button>
+                <button onclick="goToStep(17)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-17">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">17</span>
+                    <span>Instalação Concluída</span>
+                </button>
+                <button onclick="goToStep(18)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-18">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">18</span>
+                    <span>Remover Mídia</span>
+                </button>
+                <button onclick="goToStep(19)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-19">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">19</span>
+                    <span>Ecrã de Login</span>
+                </button>
+                <button onclick="goToStep(20)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-20">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">20</span>
+                    <span>Boas-vindas</span>
+                </button>
+                <button onclick="goToStep(21)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-21">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">21</span>
+                    <span>Abrir o Terminal</span>
+                </button>
+                <button onclick="goToStep(22)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-22">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">22</span>
+                    <span>Comando de Atualização</span>
+                </button>
+                <button onclick="goToStep(23)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-23">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">23</span>
+                    <span>Inserir Palavra-passe</span>
+                </button>
+                <button onclick="goToStep(24)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-24">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">24</span>
+                    <span>Gerenciador Gráfico</span>
+                </button>
+                <button onclick="goToStep(25)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-25">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">25</span>
+                    <span>Sistema Atualizado</span>
+                </button>
+                <button onclick="goToStep(26)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-26">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">26</span>
+                    <span>Conclusão no Terminal</span>
+                </button>
+                <button onclick="goToStep(27)" class="sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200" id="side-btn-27">
+                    <span class="w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700">27</span>
+                    <span>Instalar Aplicativos</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Visualizador das Etapas (Carrossel) -->
+        <div class="flex-1 min-w-0">
+            <div class="bg-slate-800/40 border border-slate-800 rounded-2xl p-6 md:p-8 step-card">
+                
+                <!-- Passo 1 -->
+                                <!-- Passo 1 -->
+                <div id="step-content-1" class="step-content space-y-6">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 1</span>
+                        <h2 class="text-2xl font-extrabold text-white">Criar uma Nova Máquina Virtual</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Abra o <strong class="text-white">Oracle VM VirtualBox</strong>. No menu superior ou na tela inicial do gerenciador de máquinas, clique no botão azul redondo <strong class="text-emerald-400">"Novo"</strong> (com a estrela azul destacada) para começar a configurar os recursos necessários.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="001.png" alt="Criando uma Nova Máquina Virtual no VirtualBox" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 2 -->
+                <div id="step-content-2" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 2</span>
+                        <h2 class="text-2xl font-extrabold text-white">Localizar a Imagem ISO</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Dê um nome intuitivo para a sua máquina (como <strong>"Linux Mint MATE"</strong>) e defina o local em que ela ficará guardada. Em <strong class="text-white">"ISO Image"</strong>, clique no menu de opções e selecione a opção <strong class="text-emerald-400">"Outro..."</strong> (indicada com a seta vermelha) para abrir o navegador de pastas.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="002.png" alt="Localizando a imagem ISO no menu do assistente" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 3 -->
+                <div id="step-content-3" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 3</span>
+                        <h2 class="text-2xl font-extrabold text-white">Selecionar o Ficheiro ISO no Explorador</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Uma janela de busca do seu sistema de arquivos se abrirá. Navegue até a pasta onde salvou o arquivo baixado (por exemplo, na pasta de ISOs no disco local), clique sobre o arquivo <strong class="text-emerald-400">"linuxmint-22.3-mate-64bit.iso"</strong> e clique em <strong class="text-white">"Abrir"</strong>.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="003.png" alt="Janela de Seleção do Explorador de Arquivos com a ISO" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 4 -->
+                <div id="step-content-4" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 4</span>
+                        <h2 class="text-2xl font-extrabold text-white">Confirmar Configurações da ISO</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Verifique se o arquivo foi carregado com sucesso no campo "ISO Image". As informações de tipo e versão serão ajustadas automaticamente para sistemas Linux. Mantenha as configurações padrões e clique em avançar.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="004.png" alt="Confirmação da ISO selecionada no assistente" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 5 -->
+                <div id="step-content-5" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 5</span>
+                        <h2 class="text-2xl font-extrabold text-white">Ajustar Hardware Virtual</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Ajuste as configurações de hardware dedicadas à máquina. No exemplo, definimos <strong class="text-white">8192 MB (8GB) de Memória RAM</strong> e <strong class="text-white">4 processadores (CPUs)</strong> virtuais para garantir uma ótima velocidade ao navegar e atualizar o sistema.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="005.png" alt="Ajuste de RAM e processadores virtuais" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 6 -->
+                <div id="step-content-6" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 6</span>
+                        <h2 class="text-2xl font-extrabold text-white">Criar o Disco Rígido Virtual</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Selecione a opção <strong class="text-white">"Create a New Virtual Hard Disk"</strong> e defina o espaço para o disco virtual (recomendado <strong class="text-emerald-400">60 GB</strong> para trabalhar tranquilamente). Mantenha o formato padrão de arquivo de disco em <strong class="text-white">VDI (VirtualBox Disk Image)</strong>.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="006.png" alt="Configuração de tamanho e tipo do HD virtual" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 7 -->
+                <div id="step-content-7" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 7</span>
+                        <h2 class="text-2xl font-extrabold text-white">Iniciar a Máquina Virtual</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Com a máquina virtual criada com sucesso e listada no painel esquerdo do VirtualBox Manager, selecione a máquina <strong class="text-white">"Linux Mint MATE"</strong> e clique no botão verde com a seta para a direita <strong class="text-emerald-400">"Iniciar"</strong> no menu superior para ligar a VM.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="007.png" alt="Iniciar a Máquina Virtual no painel do VirtualBox" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 8 -->
+                <div id="step-content-8" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 8</span>
+                        <h2 class="text-2xl font-extrabold text-white">Inicialização da Máquina (GRUB)</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        A máquina virtual será inicializada. No menu do gerenciador de boot (GRUB) que se exibe em tela preta, mantenha a opção padrão selecionada: <strong class="text-emerald-400">"Start Linux Mint"</strong> e dê <kbd class="bg-slate-950 border border-slate-700 text-emerald-400 px-2 py-1 rounded text-xs">Enter</kbd>.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="008.png" alt="Menu GRUB de boot da mídia Live do Linux Mint" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 9 -->
+                <div id="step-content-9" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 9</span>
+                        <h2 class="text-2xl font-extrabold text-white">Iniciar o Instalador no Desktop Live</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        A área de trabalho "Live" do Linux Mint MATE se carregará em seguida. Clique duas vezes no ícone de CD redondo no canto superior esquerdo escrito <strong class="text-emerald-400">"Install Linux Mint"</strong> para abrir a aplicação oficial de instalação do sistema.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="009.png" alt="Área de Trabalho Live mostrando ícone de instalação" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 10 -->
+                <div id="step-content-10" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 10</span>
+                        <h2 class="text-2xl font-extrabold text-white">Escolher o Idioma Inicial</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        A janela principal de boas-vindas do assistente será exibida em seu ecrã. Na lista lateral de idiomas do lado esquerdo, role para baixo para encontrar o idioma correspondente ao seu país.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="010.png" alt="Janela de Boas-vindas com lista de idiomas à esquerda" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 11 -->
+                <div id="step-content-11" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 11</span>
+                        <h2 class="text-2xl font-extrabold text-white">Selecionar Português do Brasil</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Encontre e selecione a opção <strong class="text-emerald-400">"Português do Brasil"</strong> na lista de idiomas para traduzir todos os menus e ferramentas integradas do sistema. Após marcar, clique no botão para avançar.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <div class="p-4 bg-slate-950/40 flex justify-center items-center">
+                            <img src="011.png" alt="Seleção de Português do Brasil" class="h-auto max-h-[350px] rounded-lg border border-slate-800" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Passo 12 -->
+                <div id="step-content-12" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 12</span>
+                        <h2 class="text-2xl font-extrabold text-white">Configuração do Layout do Teclado</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Configure o padrão correspondente às teclas do seu teclado físico. Para modelos nacionais com a tecla "Ç", a opção mais indicada é <strong class="text-emerald-400">Portuguese (Brazil)</strong>. Você pode digitar alguns caracteres no campo de testes abaixo para comprovar a configuração.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="012.png" alt="Ajuste do mapeamento de teclado" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 13 -->
+                <div id="step-content-13" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 13</span>
+                        <h2 class="text-2xl font-extrabold text-white">Codecs de Multimídia</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Marque a opção <strong class="text-emerald-400">"Instalar codecs multimídia"</strong>. Estes drivers adicionais dão suporte à decodificação de vários formatos de arquivos de vídeo e componentes multimídia em páginas web de forma nativa. Clique em <strong class="text-white">"Continuar"</strong>.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="013.png" alt="Instalação de Codecs de Áudio e Vídeo" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 14 -->
+                <div id="step-content-14" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 14</span>
+                        <h2 class="text-2xl font-extrabold text-white">Tipo de Instalação</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Escolha a opção padrão de particionamento <strong class="text-emerald-400">"Apagar disco e reinstalar o Linux Mint"</strong>. Lembre-se que essa operação formatará apenas o seu disco virtual de 60GB criado no Passo 6. Em seguida, clique no botão <strong class="text-white">"Instalar agora"</strong> no canto inferior direito.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="014.png" alt="Configuração de Particionamento de Disco" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 15 -->
+                <div id="step-content-15" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 15</span>
+                        <h2 class="text-2xl font-extrabold text-white">Configuração do Fuso Horário</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Configure a localização geográfica para ajustar as informações de hora e fuso horário do sistema operativo. No exemplo, definimos <strong class="text-emerald-400">São Paulo</strong> como a região base de horário. Confirme as informações e clique em avançar.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="015.png" alt="Ajuste do fuso horário regional" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 16 -->
+                <div id="step-content-16" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 16</span>
+                        <h2 class="text-2xl font-extrabold text-white">Dados do Utilizador (Criar Perfil)</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Introduza os dados pessoais de acesso do sistema. No exemplo, criámos o utilizador <strong class="text-white">"senac"</strong>, associado ao nome de computador <code class="bg-slate-950 text-emerald-400 px-2 py-0.5 rounded font-mono text-xs">senac-VirtualBox</code>. Lembre-se de definir uma senha segura e marcar "Solicitar minha senha para entrar" para garantir a segurança da VM.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="016.png" alt="Criação de usuário e senha segura no instalador" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 17 -->
+                <div id="step-content-17" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 17</span>
+                        <h2 class="text-2xl font-extrabold text-white">Instalação Concluída</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Aguarde alguns minutos adicionais até que a barra de cópia e descompactação termine de rodar por completo. A caixa de diálogo confirmará que o processo acabou com êxito. Clique em <strong class="text-emerald-400">"Reiniciar agora"</strong>.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="017.png" alt="Aviso de confirmação de término da instalação" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 18 -->
+                <div id="step-content-18" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 18</span>
+                        <h2 class="text-2xl font-extrabold text-white">Remover Mídia de Instalação</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Antes de reiniciar de forma definitiva para o seu disco virtual rígido, a linha de comandos solicitará que remova a ISO: <strong class="text-white">"Please remove the installation medium, then press ENTER:"</strong>. Basta dar a tecla <kbd class="bg-slate-950 border border-slate-700 text-emerald-400 px-2 py-1 rounded text-xs">Enter</kbd> no seu teclado físico.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="018.png" alt="Mensagem solicitando remoção de mídia no grub" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 19 -->
+                <div id="step-content-19" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 19</span>
+                        <h2 class="text-2xl font-extrabold text-white">Ecrã de Login Inicial do Linux Mint</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Excelente! O seu sistema foi inicializado com sucesso e agora está instalado e seguro no HD. O utilizador <strong class="text-white">"Senac"</strong> aparecerá por padrão na tela de boas-vindas gráfica. Introduza a senha definida no Passo 16 e pressione <kbd class="bg-slate-950 border border-slate-700 text-emerald-400 px-2 py-1 rounded text-xs">Enter</kbd>.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="019.png" alt="Ecrã gráfico de login de segurança" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 20 -->
+                <div id="step-content-20" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 20</span>
+                        <h2 class="text-2xl font-extrabold text-white">Primeiros Passos e Boas-Vindas</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        A janela de primeiro acesso será aberta com uma guia estruturada sobre documentação e primeiros passos. Recomendamos desmarcar a opção <strong class="text-white">"Mostre esta tela de boas-vindas ao iniciar o Linux Mint"</strong> no rodapé da janela antes de fechá-la no botão de "X" superior destacado em vermelho.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="020.png" alt="Janela de Boas-vindas MATE ao primeiro boot" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 21 -->
+                <div id="step-content-21" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 21</span>
+                        <h2 class="text-2xl font-extrabold text-white">Iniciando a Linha de Comandos (Terminal)</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        No Linux, manter o seu sistema em dia é muito rápido através de comandos de atualização direta. Para abrir a linha de comandos, localize o ícone retangular com os caracteres <strong class="text-white">">_"</strong> na barra de tarefas inferior e clique uma vez sobre ele (conforme indicado com a seta vermelha).
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="021.png" alt="Localizando o ícone do Terminal na barra MATE" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 22 -->
+                <div id="step-content-22" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 22</span>
+                        <h2 class="text-2xl font-extrabold text-white">Comando de Atualização Completa</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Com o utilitário de terminal aberto, digite a instrução de atualização que combina a verificação de repositórios ao download e aplicação de pacotes mais recentes:
+                    </p>
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 font-mono text-emerald-400 text-sm flex justify-between items-center">
+                        <span>sudo apt update && sudo apt upgrade -y</span>
+                    </div>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl mt-4">
+                        <img src="022.png" alt="Comando de Update inserido na linha do prompt" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 23 -->
+                <div id="step-content-23" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 23</span>
+                        <h2 class="text-2xl font-extrabold text-white">Autenticar no Terminal via Superutilizador (sudo)</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Por motivos de segurança cibernética, o utilitário do sistema solicitará a sua senha de acesso. Digite a sua senha criada no passo 16 de forma oculta. Note que <strong class="text-white">os caracteres da sua senha não se movem ou aparecem na tela</strong> por questão de privacidade visual, apenas dê <kbd class="bg-slate-950 border border-slate-700 text-emerald-400 px-2 py-1 rounded text-xs">Enter</kbd> após digitar.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="023.png" alt="Prompt digitando senha para senac no terminal" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 24 -->
+                <div id="step-content-24" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 24</span>
+                        <h2 class="text-2xl font-extrabold text-white">Ferramenta Gráfica de Atualizações</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Além do prático terminal de comandos, o Linux Mint oferece uma ferramenta integrada extremamente didática. Abra o <strong class="text-white">Gerenciador de Atualizações</strong> gráfica no painel de controle. Ele exibirá guias úteis para prevenção automática de vulnerabilidades, patches rápidos de segurança e ferramentas automáticas para recuperar regressões de erros (snapshots). Clique em <strong class="text-emerald-400">"OK"</strong>.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="024.png" alt="Painel gráfico de Boas-vindas ao Gerenciador de Atualizações" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 25 -->
+                <div id="step-content-25" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 25</span>
+                        <h2 class="text-2xl font-extrabold text-white">Verificação de Sucesso (Sistema Atualizado)</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        A ferramenta gráfica rodará em segundo plano de forma síncrona com o terminal. Uma vez aplicados todos os patches, o utilitário gráfico exibirá um visto visto centralizado confirmando: <strong class="text-emerald-400">"Seu sistema está atualizado"</strong>. Clique no botão azul "X" superior (conforme destacado em vermelho na imagem) para fechar.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="025.png" alt="Verificação de sistema atualizado com êxito" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 26 -->
+                <div id="step-content-26" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 26</span>
+                        <h2 class="text-2xl font-extrabold text-white">Conclusão de Pacotes no Terminal</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        De volta ao Terminal de comandos, você poderá ver o log completo de instalação do seu Kernel Linux que rodou em segurança, o carregador de inicialização grub atualizado com a imagem e os módulos do módulo dkms compilados. Quando o prompt de comando retornar a linha <code class="bg-slate-950 text-emerald-400 px-2 py-0.5 rounded font-mono text-xs">senac@senac-VirtualBox:~$</code>, as atualizações foram concluídas com perfeição. Clique em fechar (X destacado) no topo.
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="026.png" alt="Lista de comandos do grub e kernel finalizando atualizações" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+                <!-- Passo 27 -->
+                <div id="step-content-27" class="step-content space-y-6 hidden">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full">Passo 27</span>
+                        <h2 class="text-2xl font-extrabold text-white">Aceder ao Gerenciador de Aplicativos (Loja Oficial)</h2>
+                    </div>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Para personalizar seu novo ambiente virtual MATE com softwares adicionais educativos ou de trabalho práticos, abra o menu principal e selecione a ferramenta <strong class="text-white">"Gerenciador de Aplicativos"</strong>. A loja de softwares se abrirá expondo dezenas de ferramentas como o cliente FTP gráfico completo <strong class="text-emerald-400">"Filezilla"</strong>, utilitários, reprodutores e programas adicionais para a sua rotina!
+                    </p>
+                    <div class="border border-slate-700/60 rounded-xl overflow-hidden bg-slate-900 shadow-2xl">
+                        <img src="027.png" alt="Instalador de programas e loja do Gerenciador de Aplicativos Linux Mint" class="w-full h-auto object-cover max-h-[500px] mx-auto block" onerror="this.src='https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=1200&q=80'"/>
+                    </div>
+                </div>
+
+            
+
+                <!-- Controle de Navegação Inferior -->
+                <div class="flex items-center justify-between border-t border-slate-700/50 pt-6 mt-8">
+                    <button id="prev-btn" onclick="prevStep()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-300 font-semibold text-sm transition-all border border-slate-700 flex items-center gap-2 cursor-not-allowed opacity-50" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
+                        Anterior
+                    </button>
+                    
+                    <button id="next-btn" onclick="nextStep()" class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition-all shadow-lg shadow-emerald-500/10 flex items-center gap-2">
+                        Próximo
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="border-t border-slate-800 bg-slate-900/40 py-6 text-center text-xs text-slate-500 mt-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <p>Guia didático elaborado para instalação do sistema operacional Linux Mint 22.3 MATE em ambiente de virtualização.</p>
+        </div>
+    </footer>
+
+    <!-- Script de Navegação Dinâmica -->
+    <script>
+        let currentStep = 1;
+        const totalSteps = 27;
+
+        function updateUI() {
+            // Esconde todas as etapas
+            document.querySelectorAll('.step-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+
+            // Mostra o passo atual
+            document.getElementById(`step-content-${currentStep}`).classList.remove('hidden');
+
+            // Atualiza barra de progresso e texto informativo
+            const progressPercent = (currentStep / totalSteps) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('progress-text').innerText = `${currentStep} de ${totalSteps}`;
+
+            // Atualiza estado dos botões de controle
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            if (currentStep === 1) {
+                prevBtn.disabled = true;
+                prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                prevBtn.disabled = false;
+                prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+
+            if (currentStep === totalSteps) {
+                nextBtn.innerHTML = `Concluir <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>`;
+                nextBtn.classList.replace('bg-emerald-500', 'bg-blue-500');
+                nextBtn.classList.replace('hover:bg-emerald-400', 'hover:bg-blue-400');
+            } else {
+                nextBtn.innerHTML = `Próximo <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>`;
+                nextBtn.classList.remove('bg-blue-500', 'hover:bg-blue-400');
+                nextBtn.classList.add('bg-emerald-500', 'hover:bg-emerald-400');
+            }
+
+            // Atualiza botões da Sidebar e rola para focar no passo ativo se necessário
+            document.querySelectorAll('.sidebar-btn').forEach((btn, index) => {
+                const btnStep = index + 1;
+                const span = btn.querySelector('span:first-child');
+                
+                if (btnStep === currentStep) {
+                    btn.className = "sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
+                    span.className = "w-6 h-6 rounded-md bg-emerald-500 text-slate-950 flex items-center justify-center font-bold text-xs shrink-0";
+                    
+                    // Rola suavemente a sidebar para o botão visível
+                    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else if (btnStep < currentStep) {
+                    btn.className = "sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-emerald-400/80 hover:bg-slate-800";
+                    span.className = "w-6 h-6 rounded-md bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-xs shrink-0 border border-emerald-500/30";
+                } else {
+                    btn.className = "sidebar-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-3 text-slate-400 hover:bg-slate-800 hover:text-slate-200";
+                    span.className = "w-6 h-6 rounded-md bg-slate-800 text-slate-400 flex items-center justify-center font-bold text-xs shrink-0 border border-slate-700";
+                }
+            });
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateUI();
+            } else {
+                // Ação finalizada
+                const modal = document.createElement('div');
+                modal.className = "fixed inset-0 bg-slate-950/85 backdrop-blur flex items-center justify-center p-4 z-[100] transition-opacity duration-300";
+                modal.innerHTML = `
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 text-center shadow-2xl space-y-4">
+                        <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-3xl">🎉</div>
+                        <h3 class="text-xl font-bold text-white">Parabéns pelo Sucesso!</h3>
+                        <p class="text-sm text-slate-400">Você concluiu todo o fluxo prático: desde a criação de hardware no VirtualBox até a instalação final e gerenciamento de aplicações atualizadas no Linux Mint MATE.</p>
+                        <p class="text-xs text-slate-500">Sua máquina virtual está pronta, segura e equipada para que você possa estudar de forma produtiva!</p>
+                        <button onclick="this.closest('.fixed').remove()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 rounded-xl transition-all">Finalizar Guia</button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        }
+
+        function goToStep(step) {
+            currentStep = step;
+            updateUI();
+        }
+
+        // Inicializa ao carregar a página
+        window.onload = function() {
+            updateUI();
+        };
+    </script>
+</body>
+</html>
