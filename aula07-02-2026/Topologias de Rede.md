@@ -21,3 +21,5 @@ Exceto pela topologia de barramento, todas ainda tem seu uso nas redes.
 Popularizou-se recentemente o conceito de redes Wi-Fi Mesh, onde cada access point se comunica com outros access points a fim de aumentar a cobertura da rede sem fio, formando uma rede em formato de malha. Desta maneira, o _host_ consegue acessar a rede utilizando a fonte de sinal mais próxima, sendo que a conexão ou a transferência da conexão para o outro equipamento é realizado automaticamente, através da escolha do melhor sinal. 
 
 - Host: qualquer dispositivo que se conecta à rede. Pode ser um computador, laptop, roteador sem fio, servidor, Alexa, TV, vídeo game, impressora, celular, tablet, etc...
+
+[Network Topology](https://www.ibm.com/br-pt/think/topics/network-topology?authuser=0)
