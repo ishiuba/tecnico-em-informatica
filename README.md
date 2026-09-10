@@ -1,2 +1,3 @@
-# tecnico-em-informatica
-repositorio para o curso tecnico em info do senac pr
+# Técnico em Informática
+
+Repositório para o curso Técnico em Informática do SENAC PR
