@@ -1,4 +1,4 @@
-# Desativar auto-login no Windows Server 2025 (aula 10-05-2026)
+# Desativar auto-login no Windows Server 2025
 
 Abra o Prompt de Comando (CMD) como Administrador e execute o comando abaixo para desativar o logon automático:
 
